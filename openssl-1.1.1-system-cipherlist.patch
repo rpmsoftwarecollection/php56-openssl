@@ -238,7 +238,7 @@ diff -up openssl-1.1.1c/ssl/ssl_ciph.c.system-cipherlist openssl-1.1.1c/ssl/ssl_
      }
  
      /*
-@@ -1592,14 +1648,18 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_
+@@ -1592,10 +1648,13 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_
       * if we cannot get one.
       */
      if ((cipherstack = sk_SSL_CIPHER_new_null()) == NULL) {
@@ -254,11 +254,6 @@ diff -up openssl-1.1.1c/ssl/ssl_ciph.c.system-cipherlist openssl-1.1.1c/ssl/ssl_
      /* Add TLSv1.3 ciphers first - we always prefer those if possible */
      for (i = 0; i < sk_SSL_CIPHER_num(tls13_ciphersuites); i++) {
          if (!sk_SSL_CIPHER_push(cipherstack,
-                                 sk_SSL_CIPHER_value(tls13_ciphersuites, i))) {
-+            OPENSSL_free(co_list);
-             sk_SSL_CIPHER_free(cipherstack);
-             return NULL;
-         }
 @@ -1631,6 +1691,14 @@ STACK_OF(SSL_CIPHER) *ssl_create_cipher_
      *cipher_list = cipherstack;
  

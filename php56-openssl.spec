@@ -120,8 +120,6 @@ set -ex
 %patch -P 60 -p1 -b .krb5-kdf
 %patch -P 69 -p1 -b .alpn-cb
 %patch -P 71 -p1 -b .conf-new
-
-cp apps/openssl.cnf apps/openssl11.cnf
 %{?scl:EOF}
 
 
@@ -224,7 +222,6 @@ done
 set -ex
 # Verify that what was compiled actually works.
 
-cp apps/openssl.cnf apps/openssl11.cnf
 
 # Hack - either enable SCTP AUTH chunks in kernel or disable sctp for check
 (sysctl net.sctp.addip_enable=1 && sysctl net.sctp.auth_enable=1) || \
@@ -306,7 +303,7 @@ install -m644 %{SOURCE9} \
 
 
 # Install compat config file
-install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl.cnf
+install -D -m 644 apps/openssl.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl.cnf
 %{?scl:EOF}
 
 
@@ -315,10 +312,15 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %license LICENSE
 %doc FAQ NEWS README README.FIPS
 %{_bindir}/openssl
-%attr(0755,root,root) %{_libdir}/libcrypto.so
-%attr(0755,root,root) %{_libdir}/libssl.so
+%{_bindir}/c_rehash
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl.cnf
-
+%{_sysconfdir}/pki/tls/ct_log_list.cnf
+%{_sysconfdir}/pki/tls/ct_log_list.cnf.dist
+%{_sysconfdir}/pki/tls/misc/CA.pl
+%{_sysconfdir}/pki/tls/misc/tsget
+%{_sysconfdir}/pki/tls/misc/tsget.pl
+%{_sysconfdir}/pki/tls/openssl.cnf
+%{_sysconfdir}/pki/tls/openssl.cnf.dist
 %dir %{_sysconfdir}/pki/tls
 %attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl.cnf
 
@@ -326,8 +328,14 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %files devel
 %doc CHANGES doc/dir-locals.example.el doc/openssl-c-indent.el
 %{_prefix}/include/openssl
+%attr(0755,root,root) %{_libdir}/*.so
+%attr(0755,root,root) %{_libdir}/*.so*
 %{_libdir}/*.so
+%{_libdir}/*.so*
 %{_mandir}/man3*/*
+%{_mandir}/man1*/*
+%{_mandir}/man5*/*
+%{_mandir}/man7*/*
 %{_libdir}/pkgconfig/*.pc
 
 %post -p /sbin/ldconfig    

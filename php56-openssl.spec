@@ -17,7 +17,6 @@
 # 1.0.0 soversion = 10
 # 1.1.0 soversion = 1.1 (same as upstream although presence of some symbols
 #                        depends on build configuration options)
-%define soversion 1.1
 
 # Arches on which we need to prevent arch conflicts on opensslconf.h, must
 # also be handled in opensslconf-new.h.
@@ -247,11 +246,9 @@ set -ex
 # Install OpenSSL.
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
 %make_install
-rename so.%{soversion} so.%{version} $RPM_BUILD_ROOT%{_libdir}/*.so.%{soversion}
 for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
 	chmod 755 ${lib}
 	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`
-	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
 done
 
 # Delete static library
@@ -320,12 +317,12 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %{!?_licensedir:%global license %%doc}
 %license LICENSE
 %doc FAQ NEWS README README.FIPS
-%{_bindir}/openssl%{soversion}
+%{_bindir}/openssl
 %attr(0755,root,root) %{_libdir}/libcrypto.so.%{version}
-%attr(0755,root,root) %{_libdir}/libcrypto.so.%{soversion}
+%attr(0755,root,root) %{_libdir}/libcrypto.so
 %attr(0755,root,root) %{_libdir}/libssl.so.%{version}
-%attr(0755,root,root) %{_libdir}/libssl.so.%{soversion}
-%attr(0755,root,root) %{_libdir}/engines-%{soversion}
+%attr(0755,root,root) %{_libdir}/libssl.so
+%attr(0755,root,root) %{_libdir}/engines
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl.cnf
 
 %dir %{_sysconfdir}/pki/tls

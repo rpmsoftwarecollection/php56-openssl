@@ -25,7 +25,7 @@
 %global _performance_build 1
 
 Summary: Compatibility version of the OpenSSL library
-Name: %{?scl_prefix}openssl
+Name: php56-openssl
 Version: 1.1.1w
 Release: 1%{?dist}
 Epoch: 1
@@ -72,6 +72,7 @@ BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
 BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
 BuildRequires: perl(Time::HiRes)
 BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
+BuildRequires: scl-utils-build php56-build php56-runtime php56-scldevel
 
 
 %description

@@ -53,7 +53,7 @@ Patch50: openssl-1.1.1-ssh-kdf.patch
 Patch51: openssl-1.1.1-intel-cet.patch
 Patch60: openssl-1.1.1-krb5-kdf.patch
 Patch69: openssl-1.1.1-alpn-cb.patch
-Patch71: openssl-1.1.1-new-config-file.patch
+#Patch71: openssl-1.1.1-new-config-file.patch
 # Backported fixes including security fixes
 Patch52: openssl-1.1.1-s390x-update.patch
 
@@ -119,7 +119,7 @@ set -ex
 %patch -P 52 -p1 -b .s390x-update
 %patch -P 60 -p1 -b .krb5-kdf
 %patch -P 69 -p1 -b .alpn-cb
-%patch -P 71 -p1 -b .conf-new
+#%patch -P 71 -p1 -b .conf-new
 %{?scl:EOF}
 
 

@@ -139,7 +139,6 @@ protocols.
 Summary: A general purpose cryptography library with TLS implementation
 Requires: ca-certificates >= 2008-5
 Requires: crypto-policies >= 20180730
-Recommends: %{?scl_prefix}openssl-pkcs11%{?_isa}
 # Needed obsoletes due to the base/lib subpackage split
 Obsoletes: %{?scl_prefix}openssl < 1:1.0.1-0.3.beta3
 Obsoletes: %{?scl_prefix}openssl-fips < 1:1.0.1e-28
@@ -157,6 +156,7 @@ Summary: Files for development of applications which will use OpenSSL
 Requires: %{?scl_prefix}%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
 Requires: pkgconfig
+%{?scl:Conflicts: openssl-devel}
 
 
 %description devel
@@ -396,7 +396,7 @@ make test
     ln -sf .libssl.so.%{version}.hmac $RPM_BUILD_ROOT%{_libdir}/.libssl.so.%{soversion}.hmac \
 %{nil}
 
-%define __provides_exclude_from %{_libdir}/openssl
+#%define __provides_exclude_from %{_libdir}/openssl
 %{?scl:EOF}
 
 

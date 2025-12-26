@@ -115,12 +115,12 @@ URL: http://www.openssl.org/
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
 BuildRequires: gcc
-BuildRequires: coreutils, %{?scl_prefix}perl-interpreter, sed, %{?scl_prefix}zlib-devel, /usr/bin/cmp
-BuildRequires: %{?scl_prefix}lksctp-tools-devel
+BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
+BuildRequires: lksctp-tools-devel
 BuildRequires: /usr/bin/rename
 BuildRequires: /usr/bin/pod2man
-BuildRequires: %{?scl_prefix}procps-ng
-BuildRequires: %{?scl_prefix}perl, perl-devel, perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
+BuildRequires: procps-ng
+BuildRequires: perl, perl-devel, perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
 BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
 BuildRequires: perl(Time::HiRes)
 BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
@@ -155,7 +155,7 @@ support cryptographic algorithms and protocols.
 %package devel
 Summary: Files for development of applications which will use OpenSSL
 Requires: %{?scl_prefix}%{pkg_name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
-Requires: %{?scl_prefix}krb5-devel%{?_isa}, %{?scl_prefix}zlib-devel%{?_isa}
+Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
 Requires: pkgconfig
 %{?scl:Conflicts: openssl-devel}
 

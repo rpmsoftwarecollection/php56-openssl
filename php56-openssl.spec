@@ -1,9 +1,8 @@
-%{?scl:%scl_package openssl1.1}
+%{?scl:%scl_package openssl}
 %{!?scl:%global pkg_name %{name}}
-
-# To be reversed as soon as we verify that majority of software compiles
-# fine against 3.0 version
-%bcond_without devel
+%global _scl_prefix /opt/remi
+%global _scl_vendor remi
+%global scl_vendor remi
 
 # For the curious:
 # 0.9.5a soversion = 0
@@ -27,7 +26,7 @@
 %global _performance_build 1
 
 Summary: Compatibility version of the OpenSSL library
-Name: %{?scl_prefix}openssl1.1
+Name: %{?scl_prefix}openssl
 Version: 1.1.1w
 Release: 1%{?dist}
 Epoch: 1
@@ -63,19 +62,17 @@ License: OpenSSL and ASL 2.0
 URL: http://www.openssl.org/
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
-BuildRequires: %{?scl_prefix}make
-BuildRequires: %{?scl_prefix}gcc
-BuildRequires: %{?scl_prefix}coreutils, %{?scl_prefix}perl-interpreter, %{?scl_prefix}sed, %{?scl_prefix}zlib-devel, %{?_scl_root}/usr/bin/cmp
-BuildRequires: %{?scl_prefix}lksctp-tools-devel
+BuildRequires: make
+BuildRequires: gcc
+BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
+BuildRequires: lksctp-tools-devel
 BuildRequires: /usr/bin/rename
 BuildRequires: /usr/bin/pod2man
 BuildRequires: /usr/sbin/sysctl
-BuildRequires: %{?scl_prefix}perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
-BuildRequires: %{?scl_prefix}perl(Module::Load::Conditional), perl(File::Temp)
-BuildRequires: %{?scl_prefix}perl(Time::HiRes)
-BuildRequires: %{?scl_prefix}perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
-Conflicts: %{?scl_prefix}openssl-libs < 1:3.0
-Provides: %{?scl_prefix}deprecated()
+BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
+BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
+BuildRequires: perl(Time::HiRes)
+BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
 
 
 %description
@@ -84,25 +81,20 @@ machines. OpenSSL includes a certificate management tool and shared
 libraries which provide various cryptographic algorithms and
 protocols.
 
-%if %{with devel}
-
 %package devel
 Summary: Files for development of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{name}%{?_isa} = %{epoch}:%{version}-%{release}
-Requires: %{?scl_prefix}pkgconfig
+Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: pkgconfig
 # The devel subpackage intentionally conflicts with main openssl-devel
 # as simultaneous use of both openssl package cannot be encouraged.
 # Making the packages non-conflicting would also require further
 # changes in the dependent packages.
-Conflicts: %{?scl_prefix}openssl-devel
-Provides: %{?scl_prefix}deprecated()
 
 
 %description devel
 OpenSSL is a toolkit for supporting cryptography. The openssl-devel
 package contains include files needed to develop applications which
 support various cryptographic algorithms and protocols.
-%endif
 
 
 %prep
@@ -298,7 +290,7 @@ rm -rf  $RPM_BUILD_ROOT%{_sysconfdir}/pki/*
 
 # Remove binaries
 rm -f $RPM_BUILD_ROOT/%{_bindir}/c_rehash
-mv $RPM_BUILD_ROOT/%{_bindir}/openssl $RPM_BUILD_ROOT/%{_bindir}/openssl%{soversion}
+mv $RPM_BUILD_ROOT/%{_bindir}/openssl $RPM_BUILD_ROOT/%{_bindir}/openssl
 
 # Remove useless capi engine
 rm -f $RPM_BUILD_ROOT/%{_libdir}/engines-1.1/capi.so
@@ -334,13 +326,12 @@ install -m644 %{SOURCE9} \
 	$RPM_BUILD_ROOT/%{_prefix}/include/openssl/opensslconf.h
 %endif
 
-%if %{without devel}
 # Delete devel files
 rm -rf $RPM_BUILD_ROOT%{_includedir}/openssl
 rm -rf $RPM_BUILD_ROOT%{_mandir}/man3*
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.so
 rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig
-%endif
+
 
 # Install compat config file
 install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl11.cnf
@@ -370,7 +361,8 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %{_mandir}/man3*/*
 %{_libdir}/pkgconfig/*.pc
 
-%ldconfig_scriptlets
+%post -p /sbin/ldconfig    
+%postun -p /sbin/ldconfig
 
 
 %changelog

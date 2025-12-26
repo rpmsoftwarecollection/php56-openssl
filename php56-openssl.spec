@@ -34,81 +34,81 @@ Epoch: 1
 # We have to remove certain patented algorithms from the openssl source
 # tarball with the hobble-openssl script which is included below.
 # The original openssl upstream tarball cannot be shipped in the .src.rpm.
-Source: openssl-%{version}-hobbled.tar.xz
-Source1: hobble-openssl
-Source2: Makefile.certificate
-Source6: make-dummy-cert
-Source7: renew-dummy-cert
-Source9: opensslconf-new.h
-Source10: opensslconf-new-warning.h
-Source11: README.FIPS
-Source12: ec_curve.c
-Source13: ectest.c
+Source: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-%{version}-hobbled.tar.xz
+Source1: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/hobble-openssl
+Source2: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/Makefile.certificate
+Source6: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/make-dummy-cert
+Source7: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/renew-dummy-cert
+Source9: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/opensslconf-new.h
+Source10: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/opensslconf-new-warning.h
+Source11: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/README.FIPS
+Source12: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/ec_curve.c
+Source13: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/ectest.c
 # Build changes
-Patch1: openssl-1.1.1-build.patch
-Patch2: openssl-1.1.1-defaults.patch
-Patch3: openssl-1.1.1-no-html.patch
-Patch4: openssl-1.1.1-man-rename.patch
+Patch1: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-build.patch
+Patch2: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-defaults.patch
+Patch3: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-no-html.patch
+Patch4: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-man-rename.patch
 
 # Functionality changes
-Patch31: openssl-1.1.1-conf-paths.patch
-Patch32: openssl-1.1.1-version-add-engines.patch
-Patch33: openssl-1.1.1-apps-dgst.patch
-Patch36: openssl-1.1.1-no-brainpool.patch
-Patch37: openssl-1.1.1-ec-curves.patch
-Patch38: openssl-1.1.1-no-weak-verify.patch
-Patch40: openssl-1.1.1-sslv3-keep-abi.patch
-Patch41: openssl-1.1.1-system-cipherlist.patch
-Patch42: openssl-1.1.1-fips.patch
-Patch44: openssl-1.1.1-version-override.patch
-Patch45: openssl-1.1.1-weak-ciphers.patch
-Patch46: openssl-1.1.1-seclevel.patch
-Patch47: openssl-1.1.1-ts-sha256-default.patch
-Patch48: openssl-1.1.1-fips-post-rand.patch
-Patch49: openssl-1.1.1-evp-kdf.patch
-Patch50: openssl-1.1.1-ssh-kdf.patch
-Patch51: openssl-1.1.1-intel-cet.patch
-Patch60: openssl-1.1.1-krb5-kdf.patch
-Patch61: openssl-1.1.1-edk2-build.patch
-Patch62: openssl-1.1.1-fips-curves.patch
-Patch65: openssl-1.1.1-fips-drbg-selftest.patch
-Patch66: openssl-1.1.1-fips-dh.patch
-Patch67: openssl-1.1.1-kdf-selftest.patch
-Patch69: openssl-1.1.1-alpn-cb.patch
-Patch70: openssl-1.1.1-rewire-fips-drbg.patch
-Patch76: openssl-1.1.1-cleanup-peer-point-reneg.patch
-Patch77: openssl-1.1.1-s390x-aes.patch
-Patch78: openssl-1.1.1-detected-addr-ipv6.patch
-Patch79: openssl-1.1.1-servername-cb.patch
-Patch80: openssl-1.1.1-s390x-aes-tests.patch
+Patch31: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-conf-paths.patch
+Patch32: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-version-add-engines.patch
+Patch33: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-apps-dgst.patch
+Patch36: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-no-brainpool.patch
+Patch37: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-ec-curves.patch
+Patch38: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-no-weak-verify.patch
+Patch40: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-sslv3-keep-abi.patch
+Patch41: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-system-cipherlist.patch
+Patch42: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fips.patch
+Patch44: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-version-override.patch
+Patch45: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-weak-ciphers.patch
+Patch46: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-seclevel.patch
+Patch47: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-ts-sha256-default.patch
+Patch48: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fips-post-rand.patch
+Patch49: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-evp-kdf.patch
+Patch50: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-ssh-kdf.patch
+Patch51: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-intel-cet.patch
+Patch60: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-krb5-kdf.patch
+Patch61: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-edk2-build.patch
+Patch62: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fips-curves.patch
+Patch65: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fips-drbg-selftest.patch
+Patch66: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fips-dh.patch
+Patch67: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-kdf-selftest.patch
+Patch69: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-alpn-cb.patch
+Patch70: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-rewire-fips-drbg.patch
+Patch76: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cleanup-peer-point-reneg.patch
+Patch77: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-s390x-aes.patch
+Patch78: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-detected-addr-ipv6.patch
+Patch79: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-servername-cb.patch
+Patch80: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-s390x-aes-tests.patch
 # Backported fixes including security fixes
-Patch52: openssl-1.1.1-s390x-update.patch
-Patch53: openssl-1.1.1-fips-crng-test.patch
-Patch55: openssl-1.1.1-arm-update.patch
-Patch56: openssl-1.1.1-s390x-ecc.patch
-Patch74: openssl-1.1.1-addrconfig.patch
-Patch75: openssl-1.1.1-tls13-curves.patch
-Patch81: openssl-1.1.1-read-buff.patch
-Patch82: openssl-1.1.1-cve-2022-0778.patch
-Patch83: openssl-1.1.1-replace-expired-certs.patch
-Patch84: openssl-1.1.1-cve-2022-1292.patch
-Patch85: openssl-1.1.1-cve-2022-2068.patch
-Patch86: openssl-1.1.1-cve-2022-2097.patch
+Patch52: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-s390x-update.patch
+Patch53: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fips-crng-test.patch
+Patch55: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-arm-update.patch
+Patch56: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-s390x-ecc.patch
+Patch74: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-addrconfig.patch
+Patch75: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-tls13-curves.patch
+Patch81: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-read-buff.patch
+Patch82: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2022-0778.patch
+Patch83: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-replace-expired-certs.patch
+Patch84: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2022-1292.patch
+Patch85: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2022-2068.patch
+Patch86: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2022-2097.patch
 #OpenSSL 1.1.1t CVEs
-Patch101: openssl-1.1.1-cve-2022-4304-RSA-oracle.patch
-Patch102: openssl-1.1.1-cve-2022-4450-PEM-bio.patch
-Patch103: openssl-1.1.1-cve-2023-0215-BIO-UAF.patch
-Patch104: openssl-1.1.1-cve-2023-0286-X400.patch
+Patch101: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2022-4304-RSA-oracle.patch
+Patch102: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2022-4450-PEM-bio.patch
+Patch103: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2023-0215-BIO-UAF.patch
+Patch104: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2023-0286-X400.patch
 # OpenSSL 1.1.1v CVEs
-Patch105: openssl-1.1.1-cve-2023-3446.patch
-Patch106: openssl-1.1.1-cve-2023-3817.patch
-Patch107: openssl-1.1.1-cve-2023-5678.patch
+Patch105: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2023-3446.patch
+Patch106: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2023-3817.patch
+Patch107: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-cve-2023-5678.patch
 # Backport from OpenSSL 3.2/RHEL 9
 # Proper fix for CVE-2020-25659
-Patch108: openssl-1.1.1-pkcs1-implicit-rejection.patch
+Patch108: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-pkcs1-implicit-rejection.patch
 # Backport from OpenSSL 3.2
 # Fix for CVE-2024-5535
-Patch109: openssl-1.1.1-fix-ssl-select-next-proto.patch
+Patch109: https://raw.githubusercontent.com/rpmsoftwarecollection/php56-openssl/refs/heads/main/openssl-1.1.1-fix-ssl-select-next-proto.patch
 
 License: OpenSSL and ASL 2.0
 URL: http://www.openssl.org/

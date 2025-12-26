@@ -247,10 +247,6 @@ set -ex
 # Install OpenSSL.
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
 %make_install
-for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
-	chmod 755 ${lib}
-	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`
-done
 
 # Delete static library
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a || :
@@ -319,15 +315,13 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %license LICENSE
 %doc FAQ NEWS README README.FIPS
 %{_bindir}/openssl
-%attr(0755,root,root) %{_libdir}/libcrypto.so.%{version}
 %attr(0755,root,root) %{_libdir}/libcrypto.so
-%attr(0755,root,root) %{_libdir}/libssl.so.%{version}
 %attr(0755,root,root) %{_libdir}/libssl.so
 %attr(0755,root,root) %{_libdir}/engines
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl.cnf
 
 %dir %{_sysconfdir}/pki/tls
-%attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl11.cnf
+%attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl.cnf
 
 
 %files devel

@@ -125,7 +125,7 @@ BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
 BuildRequires: perl(Time::HiRes)
 BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
 Requires: coreutils
-Requires: %{?scl_prefix}%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: %{?scl_prefix}%{pkg_name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 
 
 %description
@@ -137,6 +137,7 @@ protocols.
 
 %package libs
 Summary: A general purpose cryptography library with TLS implementation
+Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: ca-certificates >= 2008-5
 Requires: crypto-policies >= 20180730
 # Needed obsoletes due to the base/lib subpackage split
@@ -153,7 +154,7 @@ support cryptographic algorithms and protocols.
 
 %package devel
 Summary: Files for development of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: %{?scl_prefix}%{pkg_name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
 Requires: pkgconfig
 %{?scl:Conflicts: openssl-devel}
@@ -167,7 +168,7 @@ support various cryptographic algorithms and protocols.
 
 %package static
 Summary:  Libraries for static linking of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{name}-devel%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: %{?scl_prefix}%{pkg_name}-devel%{?_isa} = %{epoch}:%{version}-%{release}
 
 
 %description static
@@ -180,7 +181,7 @@ protocols.
 %package perl
 Summary: Perl scripts provided with OpenSSL
 Requires: perl, perl-interpreter
-Requires: %{?scl_prefix}%{name}%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
 
 
 %description perl

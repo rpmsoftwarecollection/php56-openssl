@@ -317,7 +317,6 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %{_bindir}/openssl
 %attr(0755,root,root) %{_libdir}/libcrypto.so
 %attr(0755,root,root) %{_libdir}/libssl.so
-%attr(0755,root,root) %{_libdir}/engines
 %config(noreplace) %{_sysconfdir}/pki/tls/openssl.cnf
 
 %dir %{_sysconfdir}/pki/tls

@@ -85,10 +85,7 @@ protocols.
 Summary: Files for development of applications which will use OpenSSL
 Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: pkgconfig
-# The devel subpackage intentionally conflicts with main openssl-devel
-# as simultaneous use of both openssl package cannot be encouraged.
-# Making the packages non-conflicting would also require further
-# changes in the dependent packages.
+Conflicts: openssl-devel
 
 
 %description devel
@@ -282,19 +279,6 @@ for conflict in passwd rand ; do
 done
 popd
 
-# Delete non-devel man pages in the compat package
-rm -rf $RPM_BUILD_ROOT%{_mandir}/man[157]*
-
-# Delete configuration files
-rm -rf  $RPM_BUILD_ROOT%{_sysconfdir}/pki/*
-
-# Remove binaries
-rm -f $RPM_BUILD_ROOT/%{_bindir}/c_rehash
-mv $RPM_BUILD_ROOT/%{_bindir}/openssl $RPM_BUILD_ROOT/%{_bindir}/openssl
-
-# Remove useless capi engine
-rm -f $RPM_BUILD_ROOT/%{_libdir}/engines-1.1/capi.so
-
 # Determine which arch opensslconf.h is going to try to #include.
 basearch=%{_arch}
 %ifarch %{ix86}
@@ -326,15 +310,9 @@ install -m644 %{SOURCE9} \
 	$RPM_BUILD_ROOT/%{_prefix}/include/openssl/opensslconf.h
 %endif
 
-# Delete devel files
-rm -rf $RPM_BUILD_ROOT%{_includedir}/openssl
-rm -rf $RPM_BUILD_ROOT%{_mandir}/man3*
-rm -rf $RPM_BUILD_ROOT%{_libdir}/*.so
-rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig
-
 
 # Install compat config file
-install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl11.cnf
+install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl.cnf
 %{?scl:EOF}
 
 
@@ -348,7 +326,7 @@ install -D -m 644 apps/openssl11.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/opens
 %attr(0755,root,root) %{_libdir}/libssl.so.%{version}
 %attr(0755,root,root) %{_libdir}/libssl.so.%{soversion}
 %attr(0755,root,root) %{_libdir}/engines-%{soversion}
-%config(noreplace) %{_sysconfdir}/pki/tls/openssl11.cnf
+%config(noreplace) %{_sysconfdir}/pki/tls/openssl.cnf
 
 %dir %{_sysconfdir}/pki/tls
 %attr(0644,root,root) %{_sysconfdir}/pki/tls/openssl11.cnf

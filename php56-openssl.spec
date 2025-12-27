@@ -281,6 +281,7 @@ install -m644 %{SOURCE9} \
 
 # Install compat config file
 install -D -m 644 apps/openssl.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl.cnf
+rm -rf $RPM_BUILD_ROOT/usr/lib/debug/
 %{?scl:EOF}
 
 

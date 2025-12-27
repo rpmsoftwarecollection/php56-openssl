@@ -3,7 +3,7 @@
 %global _scl_prefix /opt/remi
 %global _scl_vendor remi
 %global scl_vendor remi
-%global debug_package %{nil}
+#%global debug_package %{nil}
 
 # For the curious:
 # 0.9.5a soversion = 0
@@ -99,24 +99,6 @@ Summary: Files for development of applications which will use OpenSSL
 Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: pkgconfig
 Conflicts: openssl-devel
-
-
-%description devel-debuginfo
-OpenSSL is a toolkit for supporting cryptography. The openssl-devel
-package contains include files needed to develop applications which
-support various cryptographic algorithms and protocols.
-
-%package devel-debugsource
-Summary: Files for development of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
-Requires: pkgconfig
-Conflicts: openssl-devel
-
-
-%description devel-debugsource
-OpenSSL is a toolkit for supporting cryptography. The openssl-devel
-package contains include files needed to develop applications which
-support various cryptographic algorithms and protocols.
 
 %prep
 %{?scl:scl enable %{scl} - << \EOF}
@@ -339,10 +321,6 @@ install -D -m 644 apps/openssl.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl
 
 %post -p /sbin/ldconfig    
 %postun -p /sbin/ldconfig
-
-%files devel-debuginfo -f debuginfo.list
-
-%files devel-debugsource -f debugsourcefiles.list
 
 
 %changelog

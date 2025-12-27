@@ -3,6 +3,7 @@
 %global _scl_prefix /opt/remi
 %global _scl_vendor remi
 %global scl_vendor remi
+%global debug_package %{nil}
 
 # For the curious:
 # 0.9.5a soversion = 0
@@ -245,30 +246,6 @@ set -ex
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl,%{_pkgdocdir}}
 %make_install
 
-# Delete static library
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.a || :
-
-# Rename man pages so that they don't conflict with other system man pages.
-pushd $RPM_BUILD_ROOT%{_mandir}
-ln -s -f config.5 man5/openssl.cnf.5
-for manpage in man*/* ; do
-	if [ -L ${manpage} ]; then
-		TARGET=`ls -l ${manpage} | awk '{ print $NF }'`
-		ln -snf ${TARGET}ssl ${manpage}ssl
-		rm -f ${manpage}
-	else
-		mv ${manpage} ${manpage}ssl
-	fi
-done
-for conflict in passwd rand ; do
-	rename ${conflict} ssl${conflict} man*/${conflict}*
-# Fix dangling symlinks
-	manpage=man1/openssl-${conflict}.*
-	if [ -L ${manpage} ] ; then
-		ln -snf ssl${conflict}.1ssl ${manpage}
-	fi
-done
-popd
 
 # Determine which arch opensslconf.h is going to try to #include.
 basearch=%{_arch}
@@ -328,10 +305,9 @@ install -D -m 644 apps/openssl.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl
 %files devel
 %doc CHANGES doc/dir-locals.example.el doc/openssl-c-indent.el
 %{_prefix}/include/openssl
-%attr(0755,root,root) %{_libdir}/*.so
-%attr(0755,root,root) %{_libdir}/*.so*
-%{_libdir}/*.so
-%{_libdir}/*.so*
+%attr(0755,root,root) %{_libdir}/*
+%{_libdir}/*
+%{_libdir}/engines-1.1/*
 %{_mandir}/man3*/*
 %{_mandir}/man1*/*
 %{_mandir}/man5*/*

@@ -94,12 +94,6 @@ OpenSSL is a toolkit for supporting cryptography. The openssl-devel
 package contains include files needed to develop applications which
 support various cryptographic algorithms and protocols.
 
-%package devel-debuginfo
-Summary: Files for development of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
-Requires: pkgconfig
-Conflicts: openssl-devel
-
 %prep
 %{?scl:scl enable %{scl} - << \EOF}
 set -ex

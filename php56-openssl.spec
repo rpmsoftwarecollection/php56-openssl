@@ -123,6 +123,7 @@ BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
 BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
 BuildRequires: perl(Time::HiRes)
 BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
+BuildRequires: scl-utils-build php56-build php56-runtime php56-scldevel
 Requires: coreutils
 Requires: %{?scl_prefix}%{pkg_name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 

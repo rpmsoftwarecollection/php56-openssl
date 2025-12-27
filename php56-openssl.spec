@@ -1,5 +1,8 @@
 %{?scl:%scl_package openssl}
 %{!?scl:%global pkg_name %{name}}
+%global _scl_prefix /opt/remi
+%global _scl_vendor remi
+%global scl_vendor remi
 
 # For the curious:
 # 0.9.5a soversion = 0
@@ -23,7 +26,7 @@
 %global _performance_build 1
 
 Summary: Utilities from the general purpose cryptography library with TLS implementation
-Name: %{?scl_prefix}openssl
+Name: php56-openssl
 Version: 1.1.1k
 Release: 14%{?dist}
 Epoch: 1
@@ -110,18 +113,18 @@ License: OpenSSL and ASL 2.0
 URL: http://www.openssl.org/
 %{?scl:Requires: %{scl}-runtime}
 %{?scl:BuildRequires: %{scl}-runtime}
-BuildRequires: %{?scl_prefix}gcc
-BuildRequires: %{?scl_prefix}coreutils, %{?scl_prefix}perl-interpreter, %{?scl_prefix}sed, %{?scl_prefix}zlib-devel, %{?_scl_root}/usr/bin/cmp
+BuildRequires: gcc
+BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
 BuildRequires: %{?scl_prefix}lksctp-tools-devel
 BuildRequires: /usr/bin/rename
 BuildRequires: /usr/bin/pod2man
 BuildRequires: /usr/sbin/sysctl
-BuildRequires: %{?scl_prefix}perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
-BuildRequires: %{?scl_prefix}perl(Module::Load::Conditional), perl(File::Temp)
-BuildRequires: %{?scl_prefix}perl(Time::HiRes)
-BuildRequires: %{?scl_prefix}perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
-Requires: %{?scl_prefix}coreutils
-Requires: %{?scl_prefix}%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
+BuildRequires: perl(Test::Harness), perl(Test::More), perl(Math::BigInt)
+BuildRequires: perl(Module::Load::Conditional), perl(File::Temp)
+BuildRequires: perl(Time::HiRes)
+BuildRequires: perl(FindBin), perl(lib), perl(File::Compare), perl(File::Copy)
+Requires: coreutils
+Requires: %{?scl_prefix}%{pkg_name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 
 
 %description
@@ -133,8 +136,8 @@ protocols.
 
 %package libs
 Summary: A general purpose cryptography library with TLS implementation
-Requires: %{?scl_prefix}ca-certificates >= 2008-5
-Requires: %{?scl_prefix}crypto-policies >= 20180730
+Requires: ca-certificates >= 2008-5
+Requires: crypto-policies >= 20180730
 Recommends: openssl-pkcs11%{?_isa}
 # Needed obsoletes due to the base/lib subpackage split
 Obsoletes: %{?scl_prefix}openssl < 1:1.0.1-0.3.beta3
@@ -150,9 +153,9 @@ support cryptographic algorithms and protocols.
 
 %package devel
 Summary: Files for development of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
-Requires: %{?scl_prefix}krb5-devel%{?_isa}, %{?scl_prefix}zlib-devel%{?_isa}
-Requires: %{?scl_prefix}pkgconfig
+Requires: %{?scl_prefix}%{pkg_name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
+Requires: pkgconfig
 
 
 %description devel
@@ -163,7 +166,7 @@ support various cryptographic algorithms and protocols.
 
 %package static
 Summary:  Libraries for static linking of applications which will use OpenSSL
-Requires: %{?scl_prefix}%{name}-devel%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: %{?scl_prefix}%{pkg_name}-devel%{?_isa} = %{epoch}:%{version}-%{release}
 
 
 %description static
@@ -175,8 +178,8 @@ protocols.
 
 %package perl
 Summary: Perl scripts provided with OpenSSL
-Requires: %{?scl_prefix}perl-interpreter
-Requires: %{?scl_prefix}%{name}%{?_isa} = %{epoch}:%{version}-%{release}
+Requires: perl-interpreter
+Requires: %{?scl_prefix}%{pkg_name}%{?_isa} = %{epoch}:%{version}-%{release}
 
 
 %description perl

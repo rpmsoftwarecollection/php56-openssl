@@ -101,7 +101,7 @@ Requires: %{?scl_prefix}%{pkg_name}-devel%{?_isa} = %{epoch}:%{version}-%{releas
 Requires: pkgconfig
 
 
-%description devel
+%description debug
 OpenSSL is a toolkit for supporting cryptography. The openssl-debug
 package contains include files needed to debug applications which
 support various cryptographic algorithms and protocols.

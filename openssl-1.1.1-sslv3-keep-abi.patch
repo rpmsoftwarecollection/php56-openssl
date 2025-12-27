@@ -1,0 +1,72 @@
+diff -up openssl-1.1.1/include/openssl/ssl.h.sslv3-abi openssl-1.1.1/include/openssl/ssl.h
+--- openssl-1.1.1/include/openssl/ssl.h.sslv3-abi	2018-10-01 14:15:47.926252469 +0200
++++ openssl-1.1.1/include/openssl/ssl.h	2018-10-01 14:13:23.221851065 +0200
+@@ -1838,11 +1838,11 @@ __owur const char *SSL_get_version(const
+ /* This sets the 'default' SSL version that SSL_new() will create */
+ __owur int SSL_CTX_set_ssl_version(SSL_CTX *ctx, const SSL_METHOD *meth);
+ 
+-# ifndef OPENSSL_NO_SSL3_METHOD
++/* # ifndef OPENSSL_NO_SSL3_METHOD */
+ DEPRECATEDIN_1_1_0(__owur const SSL_METHOD *SSLv3_method(void)) /* SSLv3 */
+ DEPRECATEDIN_1_1_0(__owur const SSL_METHOD *SSLv3_server_method(void))
+ DEPRECATEDIN_1_1_0(__owur const SSL_METHOD *SSLv3_client_method(void))
+-# endif
++/* # endif */
+ 
+ #define SSLv23_method           TLS_method
+ #define SSLv23_server_method    TLS_server_method
+diff -up openssl-1.1.1/ssl/methods.c.sslv3-abi openssl-1.1.1/ssl/methods.c
+--- openssl-1.1.1/ssl/methods.c.sslv3-abi	2018-09-11 14:48:23.000000000 +0200
++++ openssl-1.1.1/ssl/methods.c	2018-10-01 13:24:46.357116737 +0200
+@@ -275,4 +275,21 @@ const SSL_METHOD *DTLSv1_client_method(v
+ }
+ # endif
+ 
++# ifdef OPENSSL_NO_SSL3_METHOD
++const SSL_METHOD *SSLv3_method(void)
++{
++    return NULL;
++}
++
++const SSL_METHOD *SSLv3_server_method(void)
++{
++    return NULL;
++}
++
++const SSL_METHOD *SSLv3_client_method(void)
++{
++    return NULL;
++}
++# endif
++
+ #endif
+diff -up openssl-1.1.1/util/libssl.num.sslv3-abi openssl-1.1.1/util/libssl.num
+--- openssl-1.1.1/util/libssl.num.sslv3-abi	2018-09-11 14:48:25.000000000 +0200
++++ openssl-1.1.1/util/libssl.num	2018-10-01 13:24:46.358116760 +0200
+@@ -60,7 +60,7 @@ SSL_get_rfd
+ DTLSv1_listen                           61	1_1_0	EXIST::FUNCTION:SOCK
+ SSL_set_ssl_method                      62	1_1_0	EXIST::FUNCTION:
+ SSL_get0_security_ex_data               63	1_1_0	EXIST::FUNCTION:
+-SSLv3_client_method                     64	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0,SSL3_METHOD
++SSLv3_client_method                     64	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
+ SSL_set_security_level                  65	1_1_0	EXIST::FUNCTION:
+ DTLSv1_2_method                         66	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0,DTLS1_2_METHOD
+ SSL_get_fd                              67	1_1_0	EXIST::FUNCTION:
+@@ -205,7 +205,7 @@ SSL_do_handshake
+ SSL_CTX_get_ex_data                     206	1_1_0	EXIST::FUNCTION:
+ SSL_is_init_finished                    207	1_1_0	EXIST::FUNCTION:
+ SSL_CTX_set_default_verify_file         208	1_1_0	EXIST::FUNCTION:
+-SSLv3_method                            209	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0,SSL3_METHOD
++SSLv3_method                            209	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
+ SSL_CTX_set_cookie_generate_cb          210	1_1_0	EXIST::FUNCTION:
+ SSL_certs_clear                         211	1_1_0	EXIST::FUNCTION:
+ SSL_set_connect_state                   212	1_1_0	EXIST::FUNCTION:
+@@ -324,7 +324,7 @@ SSL_CTX_use_RSAPrivateKey_ASN1
+ SSL_CTX_use_PrivateKey_ASN1             325	1_1_0	EXIST::FUNCTION:
+ SSL_CTX_get0_privatekey                 326	1_1_0	EXIST::FUNCTION:
+ BIO_f_ssl                               327	1_1_0	EXIST::FUNCTION:
+-SSLv3_server_method                     328	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0,SSL3_METHOD
++SSLv3_server_method                     328	1_1_0	EXIST::FUNCTION:DEPRECATEDIN_1_1_0
+ SSL_SESSION_free                        329	1_1_0	EXIST::FUNCTION:
+ SSL_get_shutdown                        330	1_1_0	EXIST::FUNCTION:
+ SSL_get_peer_finished                   331	1_1_0	EXIST::FUNCTION:

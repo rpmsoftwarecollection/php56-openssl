@@ -964,7 +964,7 @@ diff -up openssl-1.1.1j/crypto/evp/pkey_kdf.c.evp-kdf openssl-1.1.1j/crypto/evp/
 +
 +const EVP_PKEY_METHOD tls1_prf_pkey_meth = {
 +    EVP_PKEY_TLS1_PRF,
-+    0,
++    EVP_PKEY_FLAG_FIPS,
 +    pkey_kdf_init,
 +    0,
 +    pkey_kdf_cleanup,
@@ -994,7 +994,7 @@ diff -up openssl-1.1.1j/crypto/evp/pkey_kdf.c.evp-kdf openssl-1.1.1j/crypto/evp/
 +
 +const EVP_PKEY_METHOD hkdf_pkey_meth = {
 +    EVP_PKEY_HKDF,
-+    0,
++    EVP_PKEY_FLAG_FIPS,
 +    pkey_kdf_init,
 +    0,
 +    pkey_kdf_cleanup,
@@ -4474,6 +4474,13 @@ diff -up openssl-1.1.1j/test/pkey_meth_kdf_test.c.evp-kdf openssl-1.1.1j/test/pk
 diff -up openssl-1.1.1j/test/recipes/30-test_evp_data/evpkdf.txt.evp-kdf openssl-1.1.1j/test/recipes/30-test_evp_data/evpkdf.txt
 --- openssl-1.1.1j/test/recipes/30-test_evp_data/evpkdf.txt.evp-kdf	2021-02-16 16:24:01.000000000 +0100
 +++ openssl-1.1.1j/test/recipes/30-test_evp_data/evpkdf.txt	2021-03-03 14:08:02.494294874 +0100
+@@ -1,5 +1,5 @@
+ #
+-# Copyright 2001-2017 The OpenSSL Project Authors. All Rights Reserved.
++# Copyright 2001-2018 The OpenSSL Project Authors. All Rights Reserved.
+ #
+ # Licensed under the OpenSSL license (the "License").  You may not use
+ # this file except in compliance with the License.  You can obtain a copy
 @@ -15,7 +15,7 @@
  Title = TLS1 PRF tests (from NIST test vectors)
  
@@ -4733,7 +4740,7 @@ diff -up openssl-1.1.1j/test/recipes/30-test_evp_data/evpkdf.txt.evp-kdf openssl
  Output = 2c91117204d745f3500d636a62f64f0ab3bae548aa53d423b0d1f27ebba6f5e5673a081d70cce7acfc48
 @@ -303,3 +303,133 @@ Ctrl.r = r:8
  Ctrl.p = p:1
- Result = KDF_DERIVE_ERROR
+ Result = INTERNAL_ERROR
  
 +Title = PBKDF2 tests
 +
@@ -5206,10 +5213,10 @@ diff -up openssl-1.1.1j/test/recipes/30-test_evp.t.evp-kdf openssl-1.1.1j/test/r
 diff -up openssl-1.1.1j/util/libcrypto.num.evp-kdf openssl-1.1.1j/util/libcrypto.num
 --- openssl-1.1.1j/util/libcrypto.num.evp-kdf	2021-03-03 14:08:02.481294758 +0100
 +++ openssl-1.1.1j/util/libcrypto.num	2021-03-03 14:08:02.495294883 +0100
-@@ -4591,3 +4591,11 @@
- X509_REQ_set0_signature                 4545	1_1_1h	EXIST::FUNCTION:
- X509_REQ_set1_signature_algo            4546	1_1_1h	EXIST::FUNCTION:
- EC_KEY_decoded_from_explicit_params     4547	1_1_1h	EXIST::FUNCTION:EC
+@@ -4626,3 +4626,11 @@ FIPS_drbg_get_strength
+ FIPS_rand_strength                      6380	1_1_0g	EXIST::FUNCTION:
+ FIPS_drbg_get_blocklength               6381	1_1_0g	EXIST::FUNCTION:
+ FIPS_drbg_init                          6382	1_1_0g	EXIST::FUNCTION:
 +EVP_KDF_CTX_new_id                      6590	1_1_1b	EXIST::FUNCTION:
 +EVP_KDF_CTX_free                        6591	1_1_1b	EXIST::FUNCTION:
 +EVP_KDF_reset                           6592	1_1_1b	EXIST::FUNCTION:

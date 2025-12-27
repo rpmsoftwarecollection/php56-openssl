@@ -1,0 +1,31 @@
+From a3f4cd5019b60649f6eb216ebe99caa43cd96f8e Mon Sep 17 00:00:00 2001
+From: Daiki Ueno <dueno@redhat.com>
+Date: Mon, 26 Apr 2021 14:40:17 +0200
+Subject: [PATCH] BIO_lookup_ex: use AI_ADDRCONFIG only if explicit host name
+ is given
+
+The flag only affects which record types are queried (A or AAAA, or
+both), and when node is NULL, it prevents getaddrinfo returning the
+right address associated with the loopback interface.
+
+Signed-off-by: Daiki Ueno <dueno@redhat.com>
+---
+ crypto/bio/b_addr.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/crypto/bio/b_addr.c b/crypto/bio/b_addr.c
+index b023bbda40..ea15601f3d 100644
+--- a/crypto/bio/b_addr.c
++++ b/crypto/bio/b_addr.c
+@@ -689,7 +689,7 @@ int BIO_lookup_ex(const char *host, const char *service, int lookup_type,
+         hints.ai_protocol = protocol;
+ # ifdef AI_ADDRCONFIG
+ #  ifdef AF_UNSPEC
+-        if (family == AF_UNSPEC)
++        if (host != NULL && family == AF_UNSPEC)
+ #  endif
+             hints.ai_flags |= AI_ADDRCONFIG;
+ # endif
+-- 
+2.30.2
+

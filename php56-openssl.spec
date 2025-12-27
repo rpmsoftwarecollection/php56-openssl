@@ -316,9 +316,9 @@ install -D -m 644 apps/openssl.cnf $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/openssl
 %post -p /sbin/ldconfig    
 %postun -p /sbin/ldconfig
 
-%files so-debuginfo -f debuginfo.list
+%files devel-debuginfo -f debuginfo.list
 
-%files so-debugsource -f debugsourcefiles.list
+%files devel-debugsource -f debugsourcefiles.list
 
 
 %changelog

@@ -200,62 +200,62 @@ set -ex
 cp %{SOURCE12} crypto/ec/
 cp %{SOURCE13} test/
 
-%patch1 -p1 -b .build   %{?_rawbuild}
-%patch2 -p1 -b .defaults
-%patch3 -p1 -b .no-html  %{?_rawbuild}
-%patch4 -p1 -b .man-rename
+%patch -P 1 -p1 -b .build   %{?_rawbuild}
+%patch -P 2 -p1 -b .defaults
+%patch -P 3 -p1 -b .no-html  %{?_rawbuild}
+%patch -P 4 -p1 -b .man-rename
 
-%patch31 -p1 -b .conf-paths
-%patch32 -p1 -b .version-add-engines
-%patch33 -p1 -b .dgst
-%patch36 -p1 -b .no-brainpool
-%patch37 -p1 -b .curves
-%patch38 -p1 -b .no-weak-verify
-%patch40 -p1 -b .sslv3-abi
-%patch41 -p1 -b .system-cipherlist
-%patch42 -p1 -b .fips
-%patch44 -p1 -b .version-override
-%patch45 -p1 -b .weak-ciphers
-%patch46 -p1 -b .seclevel
-%patch47 -p1 -b .ts-sha256-default
-%patch48 -p1 -b .fips-post-rand
-%patch49 -p1 -b .evp-kdf
-%patch50 -p1 -b .ssh-kdf
-%patch51 -p1 -b .intel-cet
-%patch52 -p1 -b .s390x-update
-%patch53 -p1 -b .crng-test
-%patch55 -p1 -b .arm-update
-%patch56 -p1 -b .s390x-ecc
-%patch60 -p1 -b .krb5-kdf
-%patch61 -p1 -b .edk2-build
-%patch62 -p1 -b .fips-curves
-%patch65 -p1 -b .drbg-selftest
-%patch66 -p1 -b .fips-dh
-%patch67 -p1 -b .kdf-selftest
-%patch69 -p1 -b .alpn-cb
-%patch70 -p1 -b .rewire-fips-drbg
-%patch74 -p1 -b .addrconfig
-%patch75 -p1 -b .tls13-curves
-%patch76 -p1 -b .cleanup-reneg
-%patch77 -p1 -b .s390x-aes
-%patch78 -p1 -b .addr-ipv6
-%patch79 -p1 -b .servername-cb
-%patch80 -p1 -b .s390x-test-aes
-%patch81 -p1 -b .read-buff
-%patch82 -p1 -b .cve-2022-0778
-%patch83 -p1 -b .replace-expired-certs
-%patch84 -p1 -b .cve-2022-1292
-%patch85 -p1 -b .cve-2022-2068
-%patch86 -p1 -b .cve-2022-2097
-%patch101 -p1 -b .cve-2022-4304
-%patch102 -p1 -b .cve-2022-4450
-%patch103 -p1 -b .cve-2023-0215
-%patch104 -p1 -b .cve-2023-0286
-%patch105 -p1 -b .cve-2023-3446
-%patch106 -p1 -b .cve-2023-3817
-%patch107 -p1 -b .cve-2023-5678
-%patch108 -p1 -b .pkcs15imprejection
-%patch109 -p1 -b .cve-2024-5535
+%patch -P 31 -p1 -b .conf-paths
+%patch -P 32 -p1 -b .version-add-engines
+%patch -P 33 -p1 -b .dgst
+%patch -P 36 -p1 -b .no-brainpool
+%patch -P 37 -p1 -b .curves
+%patch -P 38 -p1 -b .no-weak-verify
+%patch -P 40 -p1 -b .sslv3-abi
+%patch -P 41 -p1 -b .system-cipherlist
+%patch -P 42 -p1 -b .fips
+%patch -P 44 -p1 -b .version-override
+%patch -P 45 -p1 -b .weak-ciphers
+%patch -P 46 -p1 -b .seclevel
+%patch -P 47 -p1 -b .ts-sha256-default
+%patch -P 48 -p1 -b .fips-post-rand
+%patch -P 49 -p1 -b .evp-kdf
+%patch -P 50 -p1 -b .ssh-kdf
+%patch -P 51 -p1 -b .intel-cet
+%patch -P 52 -p1 -b .s390x-update
+%patch -P 53 -p1 -b .crng-test
+%patch -P 55 -p1 -b .arm-update
+%patch -P 56 -p1 -b .s390x-ecc
+%patch -P 60 -p1 -b .krb5-kdf
+%patch -P 61 -p1 -b .edk2-build
+%patch -P 62 -p1 -b .fips-curves
+%patch -P 65 -p1 -b .drbg-selftest
+%patch -P 66 -p1 -b .fips-dh
+%patch -P 67 -p1 -b .kdf-selftest
+%patch -P 69 -p1 -b .alpn-cb
+%patch -P 70 -p1 -b .rewire-fips-drbg
+%patch -P 74 -p1 -b .addrconfig
+%patch -P 75 -p1 -b .tls13-curves
+%patch -P 76 -p1 -b .cleanup-reneg
+%patch -P 77 -p1 -b .s390x-aes
+%patch -P 78 -p1 -b .addr-ipv6
+%patch -P 79 -p1 -b .servername-cb
+%patch -P 80 -p1 -b .s390x-test-aes
+%patch -P 81 -p1 -b .read-buff
+%patch -P 82 -p1 -b .cve-2022-0778
+%patch -P 83 -p1 -b .replace-expired-certs
+%patch -P 84 -p1 -b .cve-2022-1292
+%patch -P 85 -p1 -b .cve-2022-2068
+%patch -P 86 -p1 -b .cve-2022-2097
+%patch -P 101 -p1 -b .cve-2022-4304
+%patch -P 102 -p1 -b .cve-2022-4450
+%patch -P 103 -p1 -b .cve-2023-0215
+%patch -P 104 -p1 -b .cve-2023-0286
+%patch -P 105 -p1 -b .cve-2023-3446
+%patch -P 106 -p1 -b .cve-2023-3817
+%patch -P 107 -p1 -b .cve-2023-5678
+%patch -P 108 -p1 -b .pkcs15imprejection
+%patch -P 109 -p1 -b .cve-2024-5535
 %{?scl:EOF}
 
 

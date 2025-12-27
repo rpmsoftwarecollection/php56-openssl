@@ -115,7 +115,7 @@ URL: http://www.openssl.org/
 %{?scl:BuildRequires: %{scl}-runtime}
 BuildRequires: gcc
 BuildRequires: coreutils, perl-interpreter, sed, zlib-devel, /usr/bin/cmp
-BuildRequires: %{?scl_prefix}lksctp-tools-devel
+BuildRequires: lksctp-tools-devel
 BuildRequires: /usr/bin/rename
 BuildRequires: /usr/bin/pod2man
 BuildRequires: /usr/sbin/sysctl
